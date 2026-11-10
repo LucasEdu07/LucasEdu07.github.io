@@ -64,7 +64,8 @@ h1 .human.go em::after { transform: scaleX(1); }
 .portrait { position: absolute; right: 7vw; top: 50%; width: clamp(240px, 22vw, 360px); aspect-ratio: 1; margin-top: calc(clamp(240px, 22vw, 360px) / -2);
   opacity: 0; transform: scale(.94); filter: blur(8px); transition: opacity 1.2s var(--out) .4s, transform 1.4s var(--out) .4s, filter 1.2s var(--out) .4s; }
 .hero.go .portrait { opacity: 1; transform: none; filter: none; }
-.portrait img { position: absolute; inset: 12%; width: 76%; height: 76%; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--human), 0 30px 80px -20px rgba(0,0,0,.6); }
+.portrait .ph { position: absolute; inset: 12%; border-radius: 50%; overflow: hidden; background: #000; box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--human), 0 30px 80px -20px rgba(0,0,0,.6); }
+.portrait .ph img { width: 100%; height: 100%; display: block; object-fit: cover; transform: scale(1.05); }
 .portrait svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; animation: orbit 40s linear infinite; }
 .portrait svg circle.o { fill: none; stroke: var(--agent); stroke-opacity: .45; stroke-width: .6; stroke-dasharray: 1.2 2.4; }
 .portrait svg circle.d { fill: var(--agent); filter: drop-shadow(0 0 3px var(--agent)); }
@@ -235,7 +236,7 @@ footer { padding: 40px 0 48px; border-top: 1px solid var(--line); display: flex;
 <main id="top">
   <header class="hero">
     <canvas class="flow" aria-hidden="true"></canvas>
-    <figure class="portrait"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="o" cx="50" cy="50" r="47"/><circle class="d" cx="50" cy="3" r="1.6"/></svg><img src="assets/me.webp" alt="Lucas Souza" width="370" height="370"></figure>
+    <figure class="portrait"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="o" cx="50" cy="50" r="47"/><circle class="d" cx="50" cy="3" r="1.6"/></svg><span class="ph"><img src="https://avatars.githubusercontent.com/u/148291412?v=4&amp;s=460" alt="Lucas Souza" width="460" height="460"></span></figure>
     <div class="wrap inner">
       <h1>
         <span class="agent" data-text="> agents write the code."></span>
