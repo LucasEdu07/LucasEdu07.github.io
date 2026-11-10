@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lucas Souza · AI Engineer</title>
+<meta name="description" content="Lucas Souza, AI Engineer in São José dos Campos, Brazil. LLM coding agents, CI/CD and gated deploys, .NET, Kotlin and Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0d13; --panel: #10141c; --line: #1e2530; --text: #e6edf3; --dim: #8b949e; --faint: #4b5563;
+  --ok: #3fb950; --run: #f0b429; --cyan: #2de2e6; --violet: #7b5cff; --pink: #ff3cac;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace; --sans: 'IBM Plex Sans', sans-serif;
+}
+@media (prefers-color-scheme: light) {
+  :root { --bg: #f6f8fa; --panel: #fff; --line: #d8dee4; --text: #1f2328; --dim: #57606a; --faint: #8c959f;
+          --ok: #1a7f37; --run: #9a6700; --cyan: #0b8a8f; --violet: #5b3fd9; --pink: #c4157a; }
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font: 16px/1.6 var(--sans); }
+a { color: inherit; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+/* run header */
+.run { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent);
+       backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); font: 13px var(--mono); }
+.run .wrap { display: flex; align-items: center; gap: 16px; height: 52px; }
+.run .repo { color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.run .repo b { color: var(--text); font-weight: 500; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px;
+         border: 1px solid color-mix(in srgb, var(--ok) 45%, transparent); color: var(--ok); white-space: nowrap; }
+.badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.run nav { margin-left: auto; display: flex; gap: 18px; }
+.run nav a { color: var(--dim); text-decoration: none; }
+.run nav a:hover { color: var(--text); }
+
+/* hero */
+.hero { padding: 88px 0 56px; }
+.trigger { font: 13px var(--mono); color: var(--dim); }
+.trigger code { color: var(--cyan); }
+h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin: 18px 0 14px; }
+h1 span { background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
+          -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lede { font-size: 19px; color: var(--dim); max-width: 640px; }
+.lede b { color: var(--text); font-weight: 500; }
+
+/* pipeline graph */
+.graph { display: flex; align-items: center; margin: 48px 0 0; overflow-x: auto; padding-bottom: 6px; }
+.node { flex: 0 0 auto; border: 1px solid var(--line); background: var(--panel); border-radius: 10px;
+        padding: 12px 16px; min-width: 150px; font: 13px var(--mono); }
+.node .st { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.node small { display: block; color: var(--dim); margin-top: 2px; }
+.node.live { border-color: color-mix(in srgb, var(--run) 60%, transparent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--run) 12%, transparent); }
+.edge { flex: 0 0 28px; height: 1px; background: var(--line); }
+.ic { width: 16px; height: 16px; flex: none; }
+.ok { color: var(--ok); } .live .st { color: var(--run); }
+.spin { animation: spin 1.4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* jobs */
+section { padding: 40px 0; }
+.job { border: 1px solid var(--line); background: var(--panel); border-radius: 12px; overflow: hidden; }
+.job > header { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line);
+                font: 600 14px var(--mono); }
+.job > header .t { margin-left: auto; color: var(--dim); font-weight: 400; }
+.steps { list-style: none; padding: 6px 0; }
+.steps li { display: flex; gap: 12px; padding: 9px 18px; align-items: flex-start; }
+.steps li .ic { margin-top: 4px; }
+.steps li p { flex: 1; }
+.steps li p b { font-weight: 600; }
+.steps li .t { font: 12px var(--mono); color: var(--faint); white-space: nowrap; margin-top: 3px; }
+h2 { font: 500 13px var(--mono); color: var(--dim); margin-bottom: 14px; text-transform: lowercase; }
+h2::before { content: '$ '; color: var(--cyan); }
+
+/* experience log */
+details { border-top: 1px solid var(--line); }
+details:first-of-type { border-top: 0; }
+summary { list-style: none; cursor: pointer; display: flex; gap: 12px; align-items: center; padding: 13px 18px; }
+summary::-webkit-details-marker { display: none; }
+summary:hover { background: color-mix(in srgb, var(--text) 3%, transparent); }
+summary .chev { width: 12px; height: 12px; flex: none; transition: transform .2s; color: var(--faint); }
+details[open] summary .chev { transform: rotate(90deg); }
+summary .role { font-weight: 600; }
+summary .when { margin-left: auto; font: 12px var(--mono); color: var(--dim); white-space: nowrap; }
+.log { font: 13.5px/1.7 var(--mono); color: var(--dim); padding: 2px 18px 16px 58px; counter-reset: ln; }
+.log div { position: relative; }
+.log div::before { counter-increment: ln; content: counter(ln); position: absolute; left: -32px; width: 20px;
+                   text-align: right; color: var(--faint); }
+
+/* artifacts */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+.card { border: 1px solid var(--line); background: var(--panel); border-radius: 12px; padding: 18px; text-decoration: none;
+        display: flex; flex-direction: column; gap: 8px; transition: border-color .2s, transform .2s; }
+.card:hover { border-color: var(--violet); transform: translateY(-2px); }
+.card .name { font: 600 15px var(--mono); display: flex; align-items: center; gap: 8px; }
+.card p { color: var(--dim); font-size: 15px; flex: 1; }
+.card .lang { font: 12px var(--mono); color: var(--faint); }
+.card .lang i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 18px; }
+.chips span { font: 13px var(--mono); padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; color: var(--dim); }
+.chips span.hot { color: var(--text); border-color: color-mix(in srgb, var(--cyan) 50%, transparent); }
+
+/* deploy gate */
+.gate { border: 1px dashed color-mix(in srgb, var(--run) 55%, transparent); border-radius: 12px; padding: 28px;
+        display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+.gate .q { flex: 1 1 320px; }
+.gate .q strong { display: block; font-size: 22px; margin-bottom: 4px; }
+.gate .q span { color: var(--dim); }
+.btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { font: 500 14px var(--mono); text-decoration: none; padding: 11px 18px; border-radius: 8px; border: 1px solid var(--line); }
+.btn.go { background: var(--ok); border-color: var(--ok); color: #fff; }
+.btn:hover { filter: brightness(1.1); }
+
+.activity img { width: 100%; height: auto; display: block; }
+footer { padding: 40px 0 56px; font: 12px var(--mono); color: var(--faint); }
+
+@media (max-width: 640px) {
+  .run nav { display: none; }
+  .graph { flex-wrap: wrap; gap: 10px; overflow: visible; }
+  .graph .edge { display: none; }
+  .node { min-width: calc(50% - 5px); }
+  .hero { padding-top: 56px; }
+  .steps li .t, summary .when { display: none; }
+  .log { padding-left: 46px; }
+}
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ok" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8.2l2 2 4-4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="run" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-width="1.6"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="chev" viewBox="0 0 12 12"><path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="box" viewBox="0 0 16 16"><path d="M8 1.5l6 3v7l-6 3-6-3v-7z M2 4.5l6 3 6-3 M8 7.5v7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="run">
+  <div class="wrap">
+    <span class="repo">LucasEdu07 / <b>career.yml</b></span>
+    <span class="badge">passing</span>
+    <nav aria-label="Sections"><a href="#work">work</a><a href="#projects">projects</a><a href="#stack">stack</a><a href="#contact">contact</a></nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <p class="trigger">triggered by <code>push</code> to <code>main</code> · São José dos Campos, Brazil</p>
+    <h1>Lucas Souza<br><span>AI Engineer</span></h1>
+    <p class="lede">I put <b>LLM coding agents</b> to work on real production code at Fenox Tecnologia, and build the
+      <b>CI/CD, gated deploys and quality checks</b> that keep them honest. Before that: years of .NET, SQL Server and Kotlin.</p>
+
+    <div class="graph" role="list" aria-label="Career pipeline">
+      <div class="node" role="listitem"><span class="st ok"><svg class="ic"><use href="#ok"/></svg>support</span><small>2023 · 1y</small></div>
+      <div class="edge"></div>
+      <div class="node" role="listitem"><span class="st ok"><svg class="ic"><use href="#ok"/></svg>trainee</span><small>2024 · 4mo</small></div>
+      <div class="edge"></div>
+      <div class="node" role="listitem"><span class="st ok"><svg class="ic"><use href="#ok"/></svg>developer</span><small>2025 · 1y 2mo</small></div>
+      <div class="edge"></div>
+      <div class="node live" role="listitem"><span class="st"><svg class="ic spin"><use href="#run"/></svg>ai-engineer</span><small>since Apr 2026 · <span id="elapsed">running</span></small></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>run what-i-do</h2>
+    <div class="job">
+      <header><svg class="ic ok"><use href="#ok"/></svg>what-i-do<span class="t">4 steps</span></header>
+      <ul class="steps">
+        <li><svg class="ic ok"><use href="#ok"/></svg><p><b>Agents on production code.</b> Claude Code across many repos, with sub-agents per job, the cheapest model that can do each task, and hooks that enforce team rules.</p><span class="t">ai</span></li>
+        <li><svg class="ic ok"><use href="#ok"/></svg><p><b>Deploys a human has to approve.</b> Green CI posts a card on Discord; only allowlisted people can ship to production, and every deploy records who approved it.</p><span class="t">ci/cd</span></li>
+        <li><svg class="ic ok"><use href="#ok"/></svg><p><b>Faster, cheaper pipelines.</b> Reusable GitHub Actions and self-hosted runners; caching and storage tuning cut CI time by about 55%.</p><span class="t">devops</span></li>
+        <li><svg class="ic ok"><use href="#ok"/></svg><p><b>Code quality we can measure.</b> Elenchos, an internal platform that reads SARIF, grades repos A to E and comments on pull requests.</p><span class="t">quality</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2>cat work.log</h2>
+    <div class="job">
+      <header><svg class="ic ok"><use href="#ok"/></svg>Fenox Tecnologia<span class="t">Oct 2023 – now</span></header>
+      <details open>
+        <summary><svg class="chev"><use href="#chev"/></svg><span class="role">AI Engineer</span><span class="when">Apr 2026 – now</span></summary>
+        <div class="log">
+          <div>Orchestrate coding agents with model tiering and token cost tracking</div>
+          <div>Designed the Discord-gated production deploy (Node.js bot, audit trail)</div>
+          <div>Built reusable CI: PR guard, secret scanning, Dependabot auto-merge</div>
+          <div>Android time-clock app in Kotlin and Jetpack Compose</div>
+          <div>Run the production Linux server: Docker Compose, Traefik</div>
+        </div>
+      </details>
+      <details>
+        <summary><svg class="chev"><use href="#chev"/></svg><span class="role">Software Developer</span><span class="when">Feb 2025 – Mar 2026</span></summary>
+        <div class="log">
+          <div>Enterprise web apps in C#, ASP.NET MVC and SQL Server for vehicle inspection</div>
+          <div>Stored procedures, views and reports behind daily operations</div>
+          <div>Integrations with payment, tax and external services</div>
+        </div>
+      </details>
+      <details>
+        <summary><svg class="chev"><use href="#chev"/></svg><span class="role">Developer Trainee</span><span class="when">Oct 2024 – Jan 2025</span></summary>
+        <div class="log"><div>Moved from support into code: bug fixes and features in ASP.NET, C# and Razor</div></div>
+      </details>
+      <details>
+        <summary><svg class="chev"><use href="#chev"/></svg><span class="role">Technical Support</span><span class="when">Oct 2023 – Oct 2024</span></summary>
+        <div class="log"><div>Triaged incidents and handed them to developers with the context they needed</div></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>ls artifacts/</h2>
+    <div class="grid">
+      <a class="card" href="https://github.com/LucasEdu07/friday_agents">
+        <span class="name"><svg class="ic"><use href="#box"/></svg>friday_agents</span>
+        <p>Local AI agents with memory that run on my own machine.</p>
+        <span class="lang"><i style="background:#3572A5"></i>Python</span>
+      </a>
+      <a class="card" href="https://github.com/LucasEdu07/StarFireCRM">
+        <span class="name"><svg class="ic"><use href="#box"/></svg>StarFireCRM</span>
+        <p>A small offline CRM for desktop: customers, payments, due dates and backups.</p>
+        <span class="lang"><i style="background:#178600"></i>C# · WPF</span>
+      </a>
+      <a class="card" href="https://github.com/LucasEdu07/OBDIIApp">
+        <span class="name"><svg class="ic"><use href="#box"/></svg>OBDIIApp</span>
+        <p>Talks to a car's OBD-II adapter over Bluetooth to read live data.</p>
+        <span class="lang"><i style="background:#178600"></i>C#</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="stack">
+    <h2>cat stack.txt</h2>
+    <div class="job">
+      <div class="chips">
+        <span class="hot">Claude Code</span><span class="hot">GitHub Actions</span><span class="hot">C# / .NET</span><span class="hot">Kotlin</span><span class="hot">Python</span>
+        <span>SQL Server</span><span>Node.js</span><span>Jetpack Compose</span><span>Docker</span><span>Traefik</span><span>Linux</span><span>PostgreSQL</span><span>Git</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity">
+    <h2>tail -f contributions</h2>
+    <picture>
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/LucasEdu07/LucasEdu07/output/pacman-contribution-graph.svg">
+      <img src="https://raw.githubusercontent.com/LucasEdu07/LucasEdu07/output/pacman-contribution-graph-dark.svg" alt="Pac-Man eating my GitHub contribution graph" loading="lazy" width="1214" height="288">
+    </picture>
+  </section>
+
+  <section id="contact">
+    <h2>deploy --env production</h2>
+    <div class="gate">
+      <div class="q"><strong>Waiting for approval</strong><span>This deploy needs a reviewer. Open to remote roles and good conversations.</span></div>
+      <div class="btns">
+        <a class="btn go" href="https://www.linkedin.com/in/lucas-souza-a67a52165/">Approve · LinkedIn</a>
+        <a class="btn" href="https://github.com/LucasEdu07">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">Portuguese (native) · English (professional) · Spanish (limited) — handmade, no framework.</footer>
+
+<script>
+  const s = new Date(2026, 3, 1), n = new Date();
+  const m = (n.getFullYear() - s.getFullYear()) * 12 + n.getMonth() - s.getMonth();
+  document.getElementById('elapsed').textContent = m < 12 ? m + 'mo' : Math.floor(m / 12) + 'y ' + (m % 12) + 'mo';
+</script>
+</body>
+</html>
