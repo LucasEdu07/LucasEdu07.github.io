@@ -60,6 +60,22 @@ h1 .human.go em::after { transform: scaleX(1); }
 .lede { margin-top: 40px; max-width: 520px; color: var(--mute); font-size: 19px; opacity: 0; transition: opacity 1.2s ease 1.4s; }
 .hero.go .lede { opacity: 1; }
 
+/* portrait */
+.portrait { position: absolute; right: 7vw; top: 50%; width: clamp(240px, 22vw, 360px); aspect-ratio: 1; margin-top: calc(clamp(240px, 22vw, 360px) / -2);
+  opacity: 0; transform: scale(.94); filter: blur(8px); transition: opacity 1.2s var(--out) .4s, transform 1.4s var(--out) .4s, filter 1.2s var(--out) .4s; }
+.hero.go .portrait { opacity: 1; transform: none; filter: none; }
+.portrait img { position: absolute; inset: 12%; width: 76%; height: 76%; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--human), 0 30px 80px -20px rgba(0,0,0,.6); }
+.portrait svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; animation: orbit 40s linear infinite; }
+.portrait svg circle.o { fill: none; stroke: var(--agent); stroke-opacity: .45; stroke-width: .6; stroke-dasharray: 1.2 2.4; }
+.portrait svg circle.d { fill: var(--agent); filter: drop-shadow(0 0 3px var(--agent)); }
+@keyframes orbit { to { transform: rotate(360deg); } }
+.hero .portrait { will-change: transform, opacity; }
+h1 .human .w:has(em) { display: block; width: fit-content; }
+@media (max-width: 1100px) {
+  .portrait { right: auto; left: 20px; top: 96px; margin-top: 0; width: 132px; }
+  .hero .inner { padding-top: 250px; }
+}
+
 /* reveal system */
 [data-r] { opacity: 0; transform: translateY(40px); filter: blur(6px); transition: opacity 1.1s var(--out), transform 1.1s var(--out), filter 1.1s var(--out); transition-delay: var(--d, 0s); }
 [data-r].in { opacity: 1; transform: none; filter: none; }
@@ -197,6 +213,7 @@ footer { padding: 40px 0 48px; border-top: 1px solid var(--line); display: flex;
   .chapter { padding-top: 112px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .portrait { opacity: 1 !important; transform: none !important; filter: none !important; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   [data-r], h1 .human .w, .lede, .shelf .tile { opacity: 1 !important; transform: none !important; filter: none !important; }
   [data-split] .w > span { transform: none !important; }
@@ -218,6 +235,7 @@ footer { padding: 40px 0 48px; border-top: 1px solid var(--line); display: flex;
 <main id="top">
   <header class="hero">
     <canvas class="flow" aria-hidden="true"></canvas>
+    <figure class="portrait"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="o" cx="50" cy="50" r="47"/><circle class="d" cx="50" cy="3" r="1.6"/></svg><img src="assets/me.webp" alt="Lucas Souza" width="370" height="370"></figure>
     <div class="wrap inner">
       <h1>
         <span class="agent" data-text="> agents write the code."></span>
