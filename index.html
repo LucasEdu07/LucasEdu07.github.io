@@ -7,12 +7,12 @@
 <meta name="description" content="Lucas Souza, AI Engineer in São José dos Campos, Brazil. I put AI coding agents to work on production code and build the checks, approvals and pipelines that make it safe to ship.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,300..600,0..100,0..1&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0b1416; --bg2: #0f1b1d; --ink: #e8efe9; --mute: #7f938c; --faint: #3f5552; --line: #1c2c2e;
   --agent: #9ff0d2; --human: #ffb547;
-  --serif: 'Instrument Serif', Georgia, serif; --sans: 'Geist', system-ui, sans-serif; --mono: 'Geist Mono', ui-monospace, monospace;
+  --serif: 'Fraunces', Georgia, serif; --sans: 'Bricolage Grotesque', system-ui, sans-serif; --mono: 'Fragment Mono', ui-monospace, monospace;
   --ease: cubic-bezier(.7, 0, .2, 1); --out: cubic-bezier(.16, 1, .3, 1);
 }
 @media (prefers-color-scheme: light) {
@@ -20,12 +20,12 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--ink); font: 400 17px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { background: var(--bg); color: var(--ink); font: 400 17.5px/1.62 var(--sans); letter-spacing: -.006em; font-optical-sizing: auto; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 2px solid var(--human); outline-offset: 3px; border-radius: 4px; }
 .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
-.mono { font: 500 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--mute); }
-em { font-family: var(--serif); font-style: italic; font-weight: 400; }
+.mono { font: 400 12px/1.4 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--mute); }
+em { font-family: var(--serif); font-style: italic; font-weight: 400; font-variation-settings: 'SOFT' 100, 'WONK' 1; letter-spacing: -.02em; }
 
 /* progress + nav */
 .progress { position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 20; transform-origin: left; transform: scaleX(0);
@@ -34,7 +34,7 @@ nav { position: fixed; inset: 0 0 auto 0; z-index: 10; transition: transform .5s
 nav.hide { transform: translateY(-100%); }
 nav.solid { background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(12px); }
 nav .wrap { display: flex; align-items: center; height: 64px; gap: 28px; }
-nav .me { font-weight: 500; margin-right: auto; }
+nav .me { font-weight: 600; font-stretch: 88%; letter-spacing: -.02em; font-size: 18px; margin-right: auto; }
 nav .me span { color: var(--agent); }
 nav a.l { font-size: 14px; color: var(--mute); transition: color .2s; }
 nav a.l:hover { color: var(--ink); }
@@ -44,7 +44,7 @@ nav a.l:hover { color: var(--ink); }
 .hero .inner { will-change: transform, opacity, filter; }
 .hero .mono { margin-bottom: 36px; }
 .hero .mono b { color: var(--agent); font-weight: 500; }
-h1 { font-weight: 300; font-size: clamp(44px, 8.4vw, 116px); line-height: .98; letter-spacing: -.035em; }
+h1 { font-weight: 350; font-stretch: 88%; font-size: clamp(46px, 8.6vw, 124px); line-height: .96; letter-spacing: -.03em; }
 h1 .agent { display: block; font: 400 clamp(20px, 2.6vw, 30px)/1.3 var(--mono); letter-spacing: 0; color: var(--agent); margin-bottom: 18px; min-height: 1.3em; }
 h1 .agent::after { content: '▍'; animation: blink 1s steps(1) infinite; margin-left: 2px; }
 h1 .agent.done::after { opacity: 0; animation: none; }
@@ -52,8 +52,8 @@ h1 .agent.done::after { opacity: 0; animation: none; }
 h1 .human { display: block; }
 h1 .human .w { display: inline-block; opacity: 0; transform: translateY(.35em); filter: blur(8px); transition: opacity .9s var(--out), transform .9s var(--out), filter .9s var(--out); }
 h1 .human.go .w { opacity: 1; transform: none; filter: none; }
-h1 em { position: relative; letter-spacing: -.01em; }
-h1 em::after { content: ''; position: absolute; left: 0; right: 0; bottom: .02em; height: .06em; background: var(--human); transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--ease) .9s; }
+h1 em { position: relative; font-weight: 350; letter-spacing: -.03em; padding-right: .04em; }
+h1 em::after { content: ''; position: absolute; left: 0; right: 0; bottom: -.1em; height: .055em; background: var(--human); transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--ease) .9s; }
 h1 .human.go em::after { transform: scaleX(1); }
 .lede { margin-top: 40px; max-width: 520px; color: var(--mute); font-size: 19px; opacity: 0; transition: opacity 1.2s ease 1.4s; }
 .hero.go .lede { opacity: 1; }
@@ -67,10 +67,11 @@ h1 .human.go em::after { transform: scaleX(1); }
 
 /* chapter titles */
 .chapter { padding: 160px 0 56px; }
-.chapter h2 { font: 400 clamp(40px, 6vw, 80px)/1 var(--serif); letter-spacing: -.02em; }
+.chapter h2 { font: 500 clamp(42px, 6.2vw, 84px)/1 var(--sans); font-stretch: 85%; letter-spacing: -.03em; }
 .chapter h2 .w, .contact h2 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; }
 .chapter h2 .w > span, .contact h2 .w > span { display: inline-block; transform: translateY(110%); transition: transform 1.1s var(--out); transition-delay: calc(var(--i) * 70ms); }
 .chapter h2.in .w > span, .contact h2.in .w > span { transform: none; }
+.chapter h2 em { color: var(--agent); font-weight: 400; }
 .chapter p { margin-top: 18px; color: var(--mute); max-width: 520px; }
 
 /* path (career) */
@@ -81,7 +82,7 @@ h1 .human.go em::after { transform: scaleX(1); }
 .stop::before { content: ''; position: absolute; top: -33px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); border: 1px solid var(--faint); }
 .stop.lit::before { background: var(--agent); border-color: var(--agent); }
 .stop.now::before { background: var(--human); border-color: var(--human); box-shadow: 0 0 0 6px color-mix(in srgb, var(--human) 18%, transparent); }
-.stop b { display: block; font-weight: 500; font-size: 18px; }
+.stop b { display: block; font-weight: 600; font-size: 19px; font-stretch: 88%; letter-spacing: -.02em; }
 .stop span { font-size: 14px; color: var(--mute); }
 
 /* scenes (work) */
@@ -102,7 +103,7 @@ h1 .human.go em::after { transform: scaleX(1); }
 @keyframes app { 0%, 15% { object-position: 50% 0; } 85%, 100% { object-position: 50% 100%; } }
 .copy .mono { display: flex; gap: 10px; flex-wrap: wrap; }
 .copy .mono .st { color: var(--agent); }
-.copy h3 { font: 400 clamp(36px, 4.4vw, 56px)/1.02 var(--serif); letter-spacing: -.015em; margin: 16px 0 18px; position: relative; display: inline-block; }
+.copy h3 { font: 600 clamp(34px, 4.2vw, 54px)/1.02 var(--sans); font-stretch: 82%; letter-spacing: -.022em; margin: 16px 0 18px; position: relative; display: inline-block; }
 .copy h3::after { content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 100%; background: var(--human); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease) .7s; }
 .scene.in .copy h3::after { transform: scaleX(1); }
 .copy p { color: var(--mute); max-width: 440px; }
@@ -115,7 +116,7 @@ h1 .human.go em::after { transform: scaleX(1); }
 .list { border-top: 1px solid var(--line); }
 .row { display: grid; grid-template-columns: 1.1fr 2fr auto; gap: 24px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); transition: padding .4s var(--out); }
 a.row:hover { padding-left: 12px; }
-.row b { font-weight: 500; }
+.row b { font-weight: 600; font-stretch: 90%; letter-spacing: -.015em; }
 .row span { color: var(--mute); font-size: 15px; }
 .row .mono { text-align: right; }
 .row .arr { display: inline-block; transition: transform .3s var(--out), color .3s; }
@@ -123,7 +124,7 @@ a.row:hover .arr { transform: translate(4px, -4px); color: var(--human); }
 
 /* about */
 .about { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-.about p { font-size: 22px; line-height: 1.5; font-weight: 300; }
+.about p { font-size: 24px; line-height: 1.45; font-weight: 350; letter-spacing: -.02em; }
 .about p em { font-size: 1.12em; color: var(--agent); }
 .roles { list-style: none; }
 .roles li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
@@ -136,7 +137,7 @@ a.row:hover .arr { transform: translate(4px, -4px); color: var(--human); }
 .contact { padding: 200px 0 120px; text-align: center; position: relative; isolation: isolate; }
 .contact::before { content: ''; position: absolute; left: 50%; top: 55%; width: min(900px, 120vw); aspect-ratio: 2; transform: translate(-50%, -50%) scale(var(--g, .6));
   background: radial-gradient(closest-side, color-mix(in srgb, var(--agent) 14%, transparent), transparent); pointer-events: none; z-index: -1; }
-.contact h2 { font: 400 clamp(48px, 8vw, 120px)/.95 var(--serif); letter-spacing: -.03em; }
+.contact h2 { font: 500 clamp(50px, 8.4vw, 128px)/.95 var(--sans); font-stretch: 85%; letter-spacing: -.035em; }
 .contact h2 em { color: var(--human); }
 .contact p { color: var(--mute); margin: 28px auto 44px; max-width: 460px; }
 .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -200,7 +201,7 @@ footer { padding: 40px 0 48px; border-top: 1px solid var(--line); display: flex;
   </section>
 
   <section id="work" class="wrap">
-    <div class="chapter"><h2 data-split>Selected work</h2><p data-r>Real screens from private repos at Fenox. Client names, internal documents and addresses are blurred.</p></div>
+    <div class="chapter"><h2 data-split>Selected <em>work</em></h2><p data-r>Real screens from private repos at Fenox. Client names, internal documents and addresses are blurred.</p></div>
 
     <article class="scene">
       <a class="media" href="assets/elenchos-gates.webp" target="_blank" rel="noopener" aria-label="Open the Elenchos screenshot"><img src="assets/elenchos-gates.webp" alt="Elenchos quality gate screen" loading="lazy"></a>
@@ -274,7 +275,7 @@ footer { padding: 40px 0 48px; border-top: 1px solid var(--line); display: flex;
       </div>
     </article>
 
-    <div class="chapter"><h2 data-split>Also built</h2></div>
+    <div class="chapter"><h2 data-split>Also <em>built</em></h2></div>
     <div class="list" data-r>
       <div class="row"><b>Shared CI platform</b><span>Reusable GitHub Actions for the whole org on self-hosted runners. CI got about 55% faster.</span><span class="mono">Fenox</span></div>
       <div class="row"><b>Agent memory</b><span>Checkpoints every turn, so an AI agent picks up where the last session stopped.</span><span class="mono">Fenox</span></div>
@@ -285,7 +286,7 @@ footer { padding: 40px 0 48px; border-top: 1px solid var(--line); display: flex;
   </section>
 
   <section id="about" class="wrap">
-    <div class="chapter"><h2 data-split>About</h2></div>
+    <div class="chapter"><h2 data-split>About <em>me</em></h2></div>
     <div class="about">
       <p data-r>I started at Fenox answering support tickets. Three years later I run <em>AI agents</em> across our production code. The part I care about most is the boring one: the checks that make sure what they write is right before anyone ships it.</p>
       <ul class="roles" data-r style="--d:.15s">
